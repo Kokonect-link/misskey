@@ -75,6 +75,7 @@ const props = withDefaults(defineProps<{
 .bodyBadge {
 	height: 1.3em;
 	vertical-align: -20%;
+	border-radius: 0.4em;
 }
 
 .bodyName {

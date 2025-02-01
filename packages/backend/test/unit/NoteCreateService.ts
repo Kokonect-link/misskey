@@ -60,6 +60,12 @@ describe('NoteCreateService', () => {
 			replyUserHost: null,
 			renoteUserId: null,
 			renoteUserHost: null,
+			updatedAt: null,
+			updatedAtHistory: null,
+			noteEditHistory: [],
+			hasEvent: false,
+			disableRightClick: false,
+			deleteAt: null,
 		};
 
 		const poll: IPoll = {

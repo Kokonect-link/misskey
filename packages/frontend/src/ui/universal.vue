@@ -22,7 +22,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 		<XWidgets/>
 	</div>
 
-	<button v-if="(!isDesktop || pageMetadata?.needWideArea) && !isMobile" v-vibrate="defaultStore.state.vibrateSystem ? 5 : []" :class="[$style.widgetButton, { [$style.reduceAnimation]: !defaultStore.state.animation, [$style.showEl]: (showEl && ['hideHeaderFloatBtn', 'hideFloatBtnOnly', 'hideFloatBtnNavBar', 'hide'].includes(<string>defaultStore.state.displayHeaderNavBarWhenScroll)) }]" class="_button" @click="widgetsShowing = true"><i class="ti ti-apps"></i></button>
+	<button v-if="(!isDesktop && !pageMetadata?.needWideArea) && !isMobile" v-vibrate="defaultStore.state.vibrateSystem ? 5 : []" :class="[$style.widgetButton, { [$style.reduceAnimation]: !defaultStore.state.animation, [$style.showEl]: (showEl && ['hideHeaderFloatBtn', 'hideFloatBtnOnly', 'hideFloatBtnNavBar', 'hide'].includes(<string>defaultStore.state.displayHeaderNavBarWhenScroll)) }]" class="_button" @click="widgetsShowing = true"><i class="ti ti-apps"></i></button>
 
 	<div v-if="isMobile" ref="navFooter" :class="[$style.nav, { [$style.reduceAnimation]: !defaultStore.state.animation, [$style.showEl]: (showEl && ['hideFloatBtnNavBar', 'hide'].includes(<string>defaultStore.state.displayHeaderNavBarWhenScroll)) }]">
 		<button v-if="defaultStore.state.showMenuButtonInNavbar" v-vibrate="defaultStore.state.vibrateSystem ? 5 : []" :class="$style.navButton" class="_button" @click="drawerMenuShowing = true"><i :class="$style.navButtonIcon" class="ti ti-menu-2"></i><span v-if="menuIndicated" :class="$style.navButtonIndicator" class="_blink"><i class="_indicatorCircle"></i></span></button>

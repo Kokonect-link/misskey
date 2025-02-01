@@ -38,7 +38,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 					@click.stop
 				/>
 				<div v-if="note.poll">
-					<MkPoll :noteId="note.id" :poll="note.poll" isTranslation @click.stop/>
+					<MkPoll :noteId="note.id" :poll="note.poll" :author="note.user" :emojiUrls="note.emojis" isTranslation @click.stop/>
 				</div>
 				<div v-if="translation.translator == 'ctav3'" style="margin-top: 10px; padding: 0 0 15px;">
 					<img v-if="!defaultStore.state.darkMode" src="/client-assets/color-short.svg" alt="" style="float: right;">
@@ -57,7 +57,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 				<MkMediaList v-else :mediaList="note.files" @click.stop/>
 			</div>
 			<div v-if="note.poll">
-				<MkPoll :noteId="note.id" :poll="note.poll" @click.stop/>
+				<MkPoll :noteId="note.id" :poll="note.poll" :author="note.user" :emojiUrls="note.emojis" @click.stop/>
 			</div>
 		</div>
 	</div>

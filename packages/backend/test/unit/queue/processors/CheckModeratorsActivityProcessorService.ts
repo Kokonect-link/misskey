@@ -18,6 +18,7 @@ import { QueueLoggerService } from '@/queue/QueueLoggerService.js';
 import { EmailService } from '@/core/EmailService.js';
 import { SystemWebhookService } from '@/core/SystemWebhookService.js';
 import { AnnouncementService } from '@/core/AnnouncementService.js';
+import { SystemWebhookEventType } from '@/models/SystemWebhook.js';
 
 const baseDate = new Date(Date.UTC(2000, 11, 15, 12, 0, 0));
 
@@ -336,10 +337,10 @@ describe('CheckModeratorsActivityProcessorService', () => {
 			mockModeratorRole([user1]);
 			await service.notifyInactiveModeratorsWarning({ time: 1, asDays: 0, asHours: 0 });
 
-			expect(systemWebhookService.enqueueSystemWebhook).toHaveBeenCalledTimes(2);
-			expect(systemWebhookService.enqueueSystemWebhook.mock.calls[0][0]).toEqual(systemWebhook1);
-			expect(systemWebhookService.enqueueSystemWebhook.mock.calls[1][0]).toEqual(systemWebhook2);
-			expect(systemWebhookService.enqueueSystemWebhook.mock.calls[1][0]).toEqual(systemWebhook3);
+			// typeとactiveによる絞り込みが機能しているかはSystemWebhookServiceのテストで確認する.
+			// ここでは呼び出されているか、typeが正しいかのみを確認する
+			expect(systemWebhookService.enqueueSystemWebhook).toHaveBeenCalledTimes(1);
+			expect(systemWebhookService.enqueueSystemWebhook.mock.calls[0][0] as SystemWebhookEventType).toEqual('inactiveModeratorsWarning');
 		});
 	});
 
@@ -375,8 +376,10 @@ describe('CheckModeratorsActivityProcessorService', () => {
 			mockModeratorRole([user1]);
 			await service.notifyChangeToInvitationOnly();
 
+			// typeとactiveによる絞り込みが機能しているかはSystemWebhookServiceのテストで確認する.
+			// ここでは呼び出されているか、typeが正しいかのみを確認する
 			expect(systemWebhookService.enqueueSystemWebhook).toHaveBeenCalledTimes(1);
-			expect(systemWebhookService.enqueueSystemWebhook.mock.calls[0][0]).toEqual(systemWebhook2);
+			expect(systemWebhookService.enqueueSystemWebhook.mock.calls[0][0] as SystemWebhookEventType).toEqual('inactiveModeratorsInvitationOnlyChanged');
 		});
 	});
 
@@ -413,7 +416,7 @@ describe('CheckModeratorsActivityProcessorService', () => {
 			await service.notifyChangeToDisablePublicNote();
 
 			expect(systemWebhookService.enqueueSystemWebhook).toHaveBeenCalledTimes(1);
-			expect(systemWebhookService.enqueueSystemWebhook.mock.calls[0][0]).toEqual(systemWebhook3);
+			expect(systemWebhookService.enqueueSystemWebhook.mock.calls[0][0] as SystemWebhookEventType).toEqual('inactiveModeratorsDisablePublicNoteChanged');
 		});
 	});
 });

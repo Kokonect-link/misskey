@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
-import { toUnicode } from 'punycode';
+import { toUnicode } from 'punycode.js';
 import { defineAsyncComponent, ref, watch } from 'vue';
 import * as Misskey from 'cherrypick-js';
 import { host, url } from '@@/js/config.js';

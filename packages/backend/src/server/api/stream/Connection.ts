@@ -326,7 +326,9 @@ export default class Connection {
 	}
 
 	@bindThis
-	private typingOnMessaging(param: { partner?: MiUser['id']; group?: MiUserGroup['id']; }) {
+	private typingOnMessaging(data: JsonValue | undefined) {
+		if (!data) return;
+		const param = data as { partner?: MiUser['id']; group?: MiUserGroup['id']; };
 		if (this.user) {
 			if (param.partner) {
 				// this.globalEventService.publishMessagingStream(param.partner, this.user.id, 'typing', this.user.id);

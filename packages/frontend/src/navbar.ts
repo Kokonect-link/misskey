@@ -185,6 +185,11 @@ export const navbarItemDef = reactive({
 				text: i18n.ts._mfc.cheatSheet,
 				icon: 'ti ti-help-circle',
 				to: '/mfc-cheat-sheet',
+			}, {
+				type: 'link',
+				text: i18n.ts._keyboardShortCut.list,
+				icon: 'ti ti-keyboard',
+				to: '/keyboard-shortcuts',
 			}], ev.currentTarget ?? ev.target);
 		},
 	},

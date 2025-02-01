@@ -5,13 +5,22 @@ SPDX-License-Identifier: AGPL-3.0-only
 
 <template>
 <div
-	ref="thumbnail"
-	:class="[
-		$style.root,
-		{ [$style.sensitiveHighlight]: highlightWhenSensitive && file.isSensitive },
-	]"
+	v-panel
+	:class="[$style.root, {
+		[$style.sensitiveHighlight]: highlightWhenSensitive && file.isSensitive,
+		[$style.large]: large,
+	}]"
 >
-	<ImgWithBlurhash v-if="isThumbnailAvailable" :hash="file.blurhash" :src="file.thumbnailUrl" :alt="file.comment" :title="file.name" :cover="fit !== 'contain'" :showAltIndicator="showAltIndicator"/>
+	<ImgWithBlurhash
+		v-if="isThumbnailAvailable"
+		:hash="file.blurhash"
+		:src="file.thumbnailUrl"
+		:alt="file.comment"
+		:title="file.name"
+		:cover="fit !== 'contain'"
+		:forceBlurHash="forceBlurhash"
+		:showAltIndicator="showAltIndicator"
+	/>
 	<i v-else-if="is === 'image'" class="ti ti-photo" :class="$style.icon"></i>
 	<i v-else-if="is === 'video'" class="ti ti-video" :class="$style.icon"></i>
 	<i v-else-if="is === 'audio' || is === 'midi'" class="ti ti-file-music" :class="$style.icon"></i>
@@ -34,6 +43,8 @@ const props = defineProps<{
 	file: Misskey.entities.DriveFile;
 	fit: 'cover' | 'contain';
 	highlightWhenSensitive?: boolean;
+	forceBlurhash?: boolean;
+	large?: boolean;
 	showAltIndicator?: boolean;
 }>();
 
@@ -61,7 +72,7 @@ const is = computed(() => {
 
 const isThumbnailAvailable = computed(() => {
 	return props.file.thumbnailUrl
-		? (is.value === 'image' as const || is.value === 'video')
+		? (is.value === 'image' || is.value === 'video')
 		: false;
 });
 </script>
@@ -101,5 +112,9 @@ const isThumbnailAvailable = computed(() => {
 	margin: auto;
 	font-size: 32px;
 	color: #777;
+}
+
+.large .icon {
+	font-size: 40px;
 }
 </style>

@@ -10,7 +10,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 			<div v-if="mock" :class="$style.name">
 				<MkUserName :user="note.user"/>
 			</div>
-			<MkA v-else v-user-preview="note.user.id" :class="$style.name" :to="userPage(note.user)">
+			<MkA v-else v-user-preview="note.user.id" :class="$style.name" :to="userPage(note.user)" noteClick>
 				<MkUserName :user="note.user"/>
 			</MkA>
 			<div v-if="note.user.isBot" :class="$style.isBot">bot</div>
@@ -44,7 +44,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 				<MkTime :time="note.createdAt" :mode="defaultStore.state.enableAbsoluteTime ? 'absolute' : 'relative'" colored/>
 			</MkA>
 		</div>
-		<div :style="$style.info"><MkInstanceTicker v-if="showTicker" :instance="note.user.instance" @click.stop="showOnRemote"/></div>
+		<div :style="$style.info"><MkInstanceTicker v-if="showTicker" :host="note.user.host" :instance="note.user.instance" @click.stop="showOnRemote"/></div>
 	</div>
 </header>
 </template>
@@ -164,6 +164,7 @@ function showOnRemote() {
 .badgeRole {
 	height: 1.3em;
 	vertical-align: -20%;
+	border-radius: 0.4em;
 
 	& + .badgeRole {
 		margin-left: 0.2em;

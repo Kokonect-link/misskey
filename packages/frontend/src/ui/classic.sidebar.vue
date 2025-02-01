@@ -52,6 +52,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 <script lang="ts" setup>
 import { defineAsyncComponent, computed, watch, ref, shallowRef } from 'vue';
 import { version } from '@@/js/config.js';
+import { compareVersions } from 'compare-versions';
 import { openInstanceMenu } from './_common_/common.js';
 // import { host } from '@@/js/config.js';
 import * as os from '@/os.js';
@@ -107,20 +108,6 @@ if ($i && ($i.isAdmin ?? $i.isModerator)) {
 		.catch(error => {
 			console.error('Failed to fetch CherryPick releases:', error);
 		});
-}
-
-function compareVersions(v1: string, v2: string): number {
-	const v1Parts = v1.split('.').map(Number);
-	const v2Parts = v2.split('.').map(Number);
-
-	for (let i = 0; i < Math.max(v1Parts.length, v2Parts.length); i++) {
-		const part1 = v1Parts[i] || 0;
-		const part2 = v2Parts[i] || 0;
-
-		if (part1 < part2) return -1;
-		if (part1 > part2) return 1;
-	}
-	return 0;
 }
 
 function calcViewState() {

@@ -163,8 +163,7 @@ async function composeNotification(data: PushNotificationDataMap[keyof PushNotif
 
 					const tag = `reaction:${data.body.note.id}`;
 					return [i18n.tsx._notification.youGotReact({ name: getUserName(data.body.user) }), {
-						// eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-						body: (reaction1.startsWith(':') ? `:${ reaction }:` : `${ reaction }` + '\n' + data.body.note.text) ?? '',
+						body: (reaction1.startsWith(':') ? `:${ reaction }:` : `${ reaction }` + '\n' + data.body.note.text),
 						icon: data.body.user.avatarUrl ?? undefined,
 						tag,
 						badge,

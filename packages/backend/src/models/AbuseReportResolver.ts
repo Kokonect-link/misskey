@@ -13,7 +13,7 @@ export class MiAbuseReportResolver {
 
 	@Index()
 	@Column('timestamp with time zone', {
-		comment: 'The updated date of AbuseReportResolver',
+		comment: 'The updated date of the AbuseReportResolver.',
 	})
 	public updatedAt: Date;
 
@@ -42,7 +42,7 @@ export class MiAbuseReportResolver {
 
 	@Index()
 	@Column('timestamp with time zone', {
-		comment: 'The expiration date of AbuseReportResolver',
+		comment: 'The expiration date of the AbuseReportResolver',
 		nullable: true,
 	})
 	public expirationDate: Date | null;

@@ -38,6 +38,7 @@ const KEY_ALIASES = {
 	'left': 'ArrowLeft',
 	'right': 'ArrowRight',
 	'plus': ['+', ';'],
+	'/': ['/', '?'],
 };
 
 const MODIFIER_KEYS = ['ctrl', 'alt', 'shift'];

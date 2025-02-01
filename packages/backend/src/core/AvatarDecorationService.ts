@@ -146,7 +146,7 @@ export class AvatarDecorationService implements OnApplicationShutdown {
 			return;
 		}
 
-		const instanceHost = instance.host;
+		const instanceHost = instance!.host;
 		const decorationApiUrl = `https://${instanceHost}/api/get-avatar-decorations`;
 		const allRes = await this.httpRequestService.send(decorationApiUrl, {
 			method: 'POST',

@@ -108,6 +108,24 @@ describe('MfmService', () => {
 			assert.deepStrictEqual(mfmService.fromHtml('<p>a <a></a> d</p>'), 'a  d');
 		});
 
+		test('ruby', () => {
+			assert.deepStrictEqual(mfmService.fromHtml('<p>a <ruby>CherryPick<rp>(</rp><rt>チェリーピック</rt><rp>)</rp></ruby> b</p>'), 'a $[ruby CherryPick チェリーピック] b');
+			assert.deepStrictEqual(mfmService.fromHtml('<p>a <ruby>CherryPick<rp>(</rp><rt>チェリーピック</rt><rp>)</rp>CherryPick<rp>(</rp><rt>チェリーピック</rt><rp>)</rp></ruby> b</p>'), 'a $[ruby CherryPick チェリーピック]$[ruby CherryPick チェリーピック] b');
+		});
+
+		test('ruby with spaces', () => {
+			assert.deepStrictEqual(mfmService.fromHtml('<p>a <ruby>Cherry Pick<rp>(</rp><rt>チェリーピック</rt><rp>)</rp> b</ruby> c</p>'), 'a Cherry Pick(チェリーピック) b c');
+			assert.deepStrictEqual(mfmService.fromHtml('<p>a <ruby>CherryPick<rp>(</rp><rt>チェリー ピック</rt><rp>)</rp> b</ruby> c</p>'), 'a CherryPick(チェリー ピック) b c');
+			assert.deepStrictEqual(
+				mfmService.fromHtml('<p>a <ruby>CherryPick<rp>(</rp><rt>チェリーピック</rt><rp>)</rp>CherryPick<rp>(</rp><rt>ミス キー</rt><rp>)</rp>CherryPick<rp>(</rp><rt>チェリーピック</rt><rp>)</rp></ruby> b</p>'),
+				'a CherryPick(チェリーピック)CherryPick(ミス キー)CherryPick(チェリーピック) b',
+			);
+		});
+
+		test('ruby with other inline tags', () => {
+			assert.deepStrictEqual(mfmService.fromHtml('<p>a <ruby><strong>CherryPick</strong><rp>(</rp><rt>チェリーピック</rt><rp>)</rp> b</ruby> c</p>'), 'a **CherryPick**(チェリーピック) b c');
+		});
+
 		test('mention', () => {
 			assert.deepStrictEqual(mfmService.fromHtml('<p>a <a href="https://example.com/@user" class="u-url mention">@user</a> d</p>'), 'a @user@example.com d');
 		});

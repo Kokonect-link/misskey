@@ -54,13 +54,13 @@ SPDX-License-Identifier: AGPL-3.0-only
 					<div v-if="user.followedMessage != null" class="followedMessage">
 						<MkFukidashi class="fukidashi" :tail="narrow ? 'none' : 'left'" negativeMargin shadow>
 							<div class="messageHeader">{{ i18n.ts.messageToFollower }}</div>
-							<div><MkSparkle><Mfm :plain="true" :text="user.followedMessage" :author="user"/></MkSparkle></div>
+							<div><MkSparkle><Mfm :plain="true" :text="user.followedMessage" :author="user" :enableEmojiMenu="!!$i"/></MkSparkle></div>
 						</MkFukidashi>
 					</div>
 					<div v-if="user.roles.length > 0" class="roles">
 						<span v-for="role in user.roles" :key="role.id" v-tooltip="role.description" class="role" :style="{ '--color': role.color }">
 							<MkA v-adaptive-bg :to="`/roles/${role.id}`">
-								<img v-if="role.iconUrl" style="height: 1.3em; vertical-align: -22%;" :src="role.iconUrl"/>
+								<img v-if="role.iconUrl" style="height: 1.3em; vertical-align: -22%; border-radius: 0.4em;" :src="role.iconUrl"/>
 								{{ role.name }}
 							</MkA>
 						</span>
@@ -87,7 +87,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 					</div>
 					<div class="description">
 						<MkOmit>
-							<Mfm v-if="user.description" :text="user.description" :isNote="false" :author="user"/>
+							<Mfm v-if="user.description" :text="user.description" :isNote="false" :author="user" :enableEmojiMenu="!!$i"/>
 							<p v-else class="empty">{{ i18n.ts.noAccountDescription }}</p>
 							<div v-if="user.description && isForeignLanguage">
 								<MkButton v-if="!(translating || translation)" class="translateButton" small @click="translate"><i class="ti ti-language-hiragana"></i> {{ i18n.ts.translateProfile }}</MkButton>
@@ -97,7 +97,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 								<MkLoading v-if="translating" mini/>
 								<div v-else-if="translation">
 									<b>{{ i18n.tsx.translatedFrom({ x: translation.sourceLang }) }}:</b><hr style="margin: 10px 0;">
-									<Mfm :text="translation.text" :isNote="false" :author="user" :nyaize="false"/>
+									<Mfm :text="translation.text" :isNote="false" :author="user" :nyaize="false" :enableEmojiMenu="!!$i"/>
 									<div v-if="translation.translator == 'ctav3'" style="margin-top: 10px; padding: 0 0 15px;">
 										<img v-if="!defaultStore.state.darkMode" src="/client-assets/color-short.svg" alt="" style="float: right;">
 										<img v-else src="/client-assets/white-short.svg" alt="" style="float: right;"/>
@@ -123,10 +123,10 @@ SPDX-License-Identifier: AGPL-3.0-only
 					<div v-if="user.fields.length > 0" class="fields">
 						<dl v-for="(field, i) in user.fields" :key="i" class="field">
 							<dt class="name">
-								<Mfm :text="field.name" :author="user" :plain="true" :colored="false"/>
+								<Mfm :text="field.name" :author="user" :plain="true" :colored="false" :enableEmojiMenu="!!$i"/>
 							</dt>
 							<dd class="value">
-								<Mfm :text="field.value" :author="user" :colored="false"/>
+								<Mfm :text="field.value" :author="user" :colored="false" :enableEmojiMenu="!!$i"/>
 								<i v-if="user.verifiedLinks.includes(field.value)" v-tooltip:dialog="i18n.ts.verifiedLink" class="ti ti-circle-check" :class="$style.verifiedLink"></i>
 							</dd>
 						</dl>
@@ -155,7 +155,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 				<MkInfo v-else-if="$i && $i.id === user.id">{{ i18n.ts.userPagePinTip }}</MkInfo>
 				<template v-if="narrow && !user.isBlocked">
 					<MkLazy>
-						<XFiles :key="user.id" :user="user"/>
+						<XFiles :key="user.id" :user="user" @unfold="emit('unfoldFiles')"/>
 					</MkLazy>
 					<MkLazy>
 						<XActivity :key="user.id" :user="user"/>
@@ -174,7 +174,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 			</div>
 		</div>
 		<div v-if="!narrow && !user.isBlocked" class="sub _gaps" style="container-type: inline-size;">
-			<XFiles :key="user.id" :user="user"/>
+			<XFiles :key="user.id" :user="user" @unfold="emit('unfoldFiles')"/>
 			<XActivity :key="user.id" :user="user"/>
 		</div>
 	</div>
@@ -242,6 +242,10 @@ const props = withDefaults(defineProps<{
 }>(), {
 	disableNotes: false,
 });
+
+const emit = defineEmits<{
+	(ev: 'unfoldFiles'): void;
+}>();
 
 const router = useRouter();
 

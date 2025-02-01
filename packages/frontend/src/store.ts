@@ -494,6 +494,10 @@ export const defaultStore = markRaw(new Storage('base', {
 		where: 'device',
 		default: true,
 	},
+	showSoftWordMutedWord: {
+		where: 'device',
+		default: false,
+	},
 	showUnreadNotificationsCount: {
 		where: 'deviceAccount',
 		default: false,

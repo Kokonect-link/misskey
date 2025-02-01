@@ -71,7 +71,7 @@ If PR includes changes to ActivityPub payload, please reflect it in [misskey-hub
 
 The name of purporsed extension property (referred as "extended property" in later) to ActivityPub shall be prefixed by `_misskey_`. (i.e. `_misskey_quote`)
 
-The extended property in `packages/backend/src/core/activitypub/type.ts` **must** be declared as optional because ActivityPub payloads that comes from older Misskey or other implementation may not contain it.
+The extended property in `packages/backend/src/core/activitypub/type.ts` **must** be declared as optional because ActivityPub payloads that comes from older CherryPick or other implementation may not contain it.
 
 The extended property must be included in the context definition. Context is defined in `packages/backend/src/core/activitypub/misc/contexts.ts`.
 The key shall be same as the name of extended property, and the value shall be same as "short IRI".
@@ -197,25 +197,10 @@ pnpm dev
 command.
 
 - Server-side source files and automatically builds them if they are modified. Automatically start the server process(es).
-- Vite HMR (just the `vite` command) is available. The behavior may be different from production.
 - Service Worker is watched by esbuild.
-- The front end can be viewed by accessing `http://localhost:5173`.
-- The backend listens on the port configured with `port` in .config/default.yml.
-If you have not changed it from the default, it will be "http://localhost:3000".
-If "port" in .config/default.yml is set to something other than 3000, you need to change the proxy settings in packages/frontend/vite.config.local-dev.ts.
-
-### `CP_DEV_PREFER=backend pnpm dev`
-pnpm dev has another mode with `CP_DEV_PREFER=backend`.
-
-```
-CP_DEV_PREFER=backend pnpm dev
-```
-
-- This mode is closer to the production environment than the default mode.
-- Vite runs behind the backend (the backend will proxy Vite at /vite).
+- Vite HMR (just the `vite` command) is available. The behavior may be different from production.
+- Vite runs behind the backend (the backend will proxy Vite at /vite and /embed_vite except for websocket used for HMR).
 - You can see CherryPick by accessing `http://localhost:3000` (Replace `3000` with the port configured with `port` in .config/default.yml).
-- To change the port of Vite, specify with `VITE_PORT` environment variable.
-- HMR may not work in some environments such as Windows.
 
 ## Testing
 You can run non-backend tests by executing following commands:
@@ -491,8 +476,10 @@ describe('test', () => {
 コード上でMisskeyのドメイン固有の概念には`Mi`をprefixすることで、他のドメインの同様の概念と区別できるほか、名前の衝突を防ぐ。
 ただし、文脈上Misskeyのものを指すことが明らかであり、名前の衝突の恐れがない場合は、一時的なローカル変数に限って`Mi`を省略してもよい。
 
-### CherryPickのドメイン固有の概念は`CP`をprefixする
-上記のような理由から、CherryPickのドメイン固有の概念を`CP`でprefixする。
+### CherryPick.jsの型生成
+```bash
+pnpm build-cherrypick-js-with-types
+```
 
 ### How to resolve conflictions occurred at pnpm-lock.yaml?
 

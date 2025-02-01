@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: syuilo and other misskey contributors
+ * SPDX-FileCopyrightText: syuilo and misskey-project
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
@@ -64,7 +64,7 @@ class BubbleTimelineChannel extends Channel {
 
 		if (isRenotePacked(note) && !isQuotePacked(note) && !this.withRenotes) return;
 
-		if (note.user.isSilenced && !this.following[note.userId] && note.userId !== this.user!.id) return;
+		if (!this.following[note.userId] && note.userId !== this.user!.id) return;
 
 		if (this.isNoteMutedOrBlocked(note)) return;
 

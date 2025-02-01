@@ -12,10 +12,11 @@ SPDX-License-Identifier: AGPL-3.0-only
 	<div>
 		<div v-if="user">
 			<MkHorizontalSwipe v-model:tab="tab" :tabs="headerTabs">
-				<XHome v-if="tab === 'home'" key="home" :user="user"/>
+				<XHome v-if="tab === 'home'" key="home" :user="user" @unfoldFiles="() => { tab = 'files'; }"/>
 				<MkSpacer v-else-if="tab === 'notes'" key="notes" :contentMax="800" style="padding-top: 0">
 					<XTimeline :user="user"/>
 				</MkSpacer>
+				<XFiles v-else-if="tab === 'files'" :user="user"/>
 				<XEvent v-else-if="tab === 'events'" key="events" :user="user"/>
 				<XActivity v-else-if="tab === 'activity'" key="activity" :user="user"/>
 				<XAchievements v-else-if="tab === 'achievements'" key="achievements" :user="user"/>
@@ -58,6 +59,7 @@ window.addEventListener('resize', () => {
 
 const XHome = defineAsyncComponent(() => import('./home.vue'));
 const XTimeline = defineAsyncComponent(() => import('./index.timeline.vue'));
+const XFiles = defineAsyncComponent(() => import('./files.vue'));
 const XEvent = defineAsyncComponent(() => import('./events.vue'));
 const XActivity = defineAsyncComponent(() => import('./activity.vue'));
 const XAchievements = defineAsyncComponent(() => import('./achievements.vue'));
@@ -122,6 +124,10 @@ const headerTabs = computed(() => user.value ? [{
 	key: 'notes',
 	title: i18n.ts.notes,
 	icon: 'ti ti-pencil',
+}, {
+	key: 'files',
+	title: i18n.ts.files,
+	icon: 'ti ti-photo',
 }, {
 	key: 'events',
 	title: i18n.ts.events,

@@ -119,7 +119,7 @@ export default class extends Endpoint<typeof meta, typeof paramDef> { // eslint-
 			let timeline = await query.limit(ps.limit).getMany();
 
 			timeline = timeline.filter(note => {
-				return !(note.user?.isSilenced && me && followings && note.userId !== me.id && !followings[note.userId]);
+				return !(note.user?.isSuspended && me && followings && note.userId !== me.id && !followings[note.userId]);
 			});
 
 			process.nextTick(() => {

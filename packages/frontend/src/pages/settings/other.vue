@@ -49,6 +49,18 @@ SPDX-License-Identifier: AGPL-3.0-only
 			</MkFolder>
 
 			<MkFolder>
+				<template #icon><i class="ti ti-recycle"></i></template>
+				<template #label>{{ i18n.ts.truncateAccount }}</template>
+
+				<div class="_gaps_m">
+					<FormInfo warn>{{ i18n.ts._accountTruncate.mayTakeTime }}</FormInfo>
+					<FormInfo>{{ i18n.ts._accountTruncate.sendEmail }}</FormInfo>
+					<MkButton v-if="!$i.isDeleted" danger @click="truncateAccount">{{ i18n.ts._accountTruncate.requestAccountTruncate }}</MkButton>
+					<MkButton v-else disabled>{{ i18n.ts._accountTruncate.inProgress }}</MkButton>
+				</div>
+			</MkFolder>
+
+			<MkFolder>
 				<template #icon><i class="ti ti-flask"></i></template>
 				<template #label>{{ i18n.ts.experimentalFeatures }}</template>
 
@@ -140,6 +152,28 @@ async function deleteAccount() {
 	});
 
 	await signout();
+}
+
+async function truncateAccount() {
+	{
+		const { canceled } = await os.confirm({
+			type: 'warning',
+			text: i18n.ts.truncateAccountConfirm,
+		});
+		if (canceled) return;
+	}
+
+	const auth = await os.authenticateDialog();
+	if (auth.canceled) return;
+
+	await os.apiWithDialog('i/truncate-account', {
+		password: auth.result.password,
+		token: auth.result.token,
+	});
+
+	await os.alert({
+		title: i18n.ts._accountTruncate.started,
+	});
 }
 
 async function updateRepliesAll(withReplies: boolean) {

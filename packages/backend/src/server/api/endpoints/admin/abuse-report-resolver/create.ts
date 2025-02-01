@@ -129,8 +129,8 @@ export default class extends Endpoint<typeof meta, typeof paramDef> {
 
 			return await this.abuseReportResolverRepository.insertOne({
 				id: this.idService.gen(),
-				updatedAt: now,
 				name: ps.name,
+				updatedAt: now,
 				targetUserPattern: ps.targetUserPattern,
 				reporterPattern: ps.reporterPattern,
 				reportContentPattern: ps.reportContentPattern,

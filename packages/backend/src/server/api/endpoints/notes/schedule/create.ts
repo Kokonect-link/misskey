@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: syuilo and other misskey contributors
+ * SPDX-FileCopyrightText: syuilo and misskey-project
  * SPDX-License-Identifier: AGPL-3.0-only
  */
 
@@ -15,10 +15,10 @@ import type {
 	DriveFilesRepository,
 	ChannelsRepository,
 	NoteScheduleRepository,
+	MiChannel,
 } from '@/models/_.js';
 import type { MiDriveFile } from '@/models/DriveFile.js';
 import type { MiNote } from '@/models/Note.js';
-import type { MiChannel } from '@/models/Channel.js';
 import { MAX_NOTE_TEXT_LENGTH } from '@/const.js';
 import { Endpoint } from '@/server/api/endpoint-base.js';
 import { DI } from '@/di-symbols.js';
@@ -149,6 +149,7 @@ export const paramDef = {
 		noExtractEmojis: { type: 'boolean', default: false },
 		replyId: { type: 'string', format: 'misskey:id', nullable: true },
 		renoteId: { type: 'string', format: 'misskey:id', nullable: true },
+		channelId: { type: 'string', format: 'misskey:id', nullable: true },
 
 		// anyOf内にバリデーションを書いても最初の一つしかチェックされない
 		// See https://github.com/misskey-dev/misskey/pull/10082
@@ -367,6 +368,15 @@ export default class extends Endpoint<typeof meta, typeof paramDef> { // eslint-
 				}
 			}
 
+			let channel: MiChannel | null = null;
+			if (ps.channelId != null) {
+				channel = await this.channelsRepository.findOneBy({ id: ps.channelId, isArchived: false });
+
+				if (channel == null) {
+					throw new ApiError(meta.errors.noSuchChannel);
+				}
+			}
+
 			if (typeof ps.scheduleNote.scheduledAt === 'number') {
 				if (ps.scheduleNote.scheduledAt < Date.now()) {
 					throw new ApiError(meta.errors.cannotCreateAlreadyExpiredSchedule);
@@ -385,7 +395,7 @@ export default class extends Endpoint<typeof meta, typeof paramDef> { // eslint-
 				}
 			}
 
-			const note:MiScheduleNoteType = {
+			const note: MiScheduleNoteType = {
 				createdAt: new Date(ps.scheduleNote.scheduledAt!).toISOString(),
 				files: files.map(f => f.id),
 				poll: ps.poll ? {
@@ -401,6 +411,7 @@ export default class extends Endpoint<typeof meta, typeof paramDef> { // eslint-
 				reactionAcceptance: ps.reactionAcceptance,
 				visibility: ps.visibility,
 				visibleUsers,
+				channel: channel?.id,
 				apMentions: ps.noExtractMentions ? [] : undefined,
 				apHashtags: ps.noExtractHashtags ? [] : undefined,
 				apEmojis: ps.noExtractEmojis ? [] : undefined,

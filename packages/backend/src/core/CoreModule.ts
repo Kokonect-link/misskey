@@ -27,6 +27,7 @@ import { CaptchaService } from './CaptchaService.js';
 import { CreateSystemUserService } from './CreateSystemUserService.js';
 import { CustomEmojiService } from './CustomEmojiService.js';
 import { DeleteAccountService } from './DeleteAccountService.js';
+import { TruncateAccountService } from './TruncateAccountService.js';
 import { DownloadService } from './DownloadService.js';
 import { DriveService } from './DriveService.js';
 import { EmailService } from './EmailService.js';
@@ -176,6 +177,7 @@ const $CaptchaService: Provider = { provide: 'CaptchaService', useExisting: Capt
 const $CreateSystemUserService: Provider = { provide: 'CreateSystemUserService', useExisting: CreateSystemUserService };
 const $CustomEmojiService: Provider = { provide: 'CustomEmojiService', useExisting: CustomEmojiService };
 const $DeleteAccountService: Provider = { provide: 'DeleteAccountService', useExisting: DeleteAccountService };
+const $TruncateAccountService: Provider = { provide: 'TruncateAccountService', useExisting: TruncateAccountService };
 const $DownloadService: Provider = { provide: 'DownloadService', useExisting: DownloadService };
 const $DriveService: Provider = { provide: 'DriveService', useExisting: DriveService };
 const $EmailService: Provider = { provide: 'EmailService', useExisting: EmailService };
@@ -333,6 +335,7 @@ const $ApEventService: Provider = { provide: 'ApEventService', useExisting: ApEv
 		CreateSystemUserService,
 		CustomEmojiService,
 		DeleteAccountService,
+		TruncateAccountService,
 		DownloadService,
 		DriveService,
 		EmailService,
@@ -486,6 +489,7 @@ const $ApEventService: Provider = { provide: 'ApEventService', useExisting: ApEv
 		$CreateSystemUserService,
 		$CustomEmojiService,
 		$DeleteAccountService,
+		$TruncateAccountService,
 		$DownloadService,
 		$DriveService,
 		$EmailService,
@@ -640,6 +644,7 @@ const $ApEventService: Provider = { provide: 'ApEventService', useExisting: ApEv
 		CreateSystemUserService,
 		CustomEmojiService,
 		DeleteAccountService,
+		TruncateAccountService,
 		DownloadService,
 		DriveService,
 		EmailService,
@@ -792,6 +797,7 @@ const $ApEventService: Provider = { provide: 'ApEventService', useExisting: ApEv
 		$CreateSystemUserService,
 		$CustomEmojiService,
 		$DeleteAccountService,
+		$TruncateAccountService,
 		$DownloadService,
 		$DriveService,
 		$EmailService,

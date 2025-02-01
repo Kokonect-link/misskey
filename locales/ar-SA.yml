@@ -1602,3 +1602,6 @@ _reversi:
 _offlineScreen:
   title: "غير متصل - يتعذر الاتصال بالخادم"
   header: "يتعذر الاتصال بالخادم"
+_remoteLookupErrors:
+  _noSuchObject:
+    title: "غير موجود"

@@ -39,7 +39,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 			>
 				<KeepAlive>
 					<div v-show="opened">
-						<MkSpacer v-if="withSpacer" :marginMin="14" :marginMax="22">
+						<MkSpacer v-if="withSpacer" :marginMin="spacerMin" :marginMax="spacerMax">
 							<slot></slot>
 						</MkSpacer>
 						<div v-else>
@@ -65,12 +65,16 @@ const props = withDefaults(defineProps<{
 	defaultOpen?: boolean;
 	maxHeight?: number | null;
 	withSpacer?: boolean;
+	spacerMin?: number;
+	spacerMax?: number;
   inactive?: boolean;
 	isArchived? :boolean;
 }>(), {
 	defaultOpen: false,
 	maxHeight: null,
 	withSpacer: true,
+	spacerMin: 14,
+	spacerMax: 22,
 	inactive: false,
 	isArchived: false,
 });

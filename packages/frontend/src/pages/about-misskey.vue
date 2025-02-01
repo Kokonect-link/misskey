@@ -186,7 +186,10 @@ SPDX-License-Identifier: AGPL-3.0-only
 				</FormSection>
 				<FormSection>
 					<template #label><Mfm text="$[jelly ❤]"/> {{ i18n.ts._aboutMisskey.patrons }}</template>
-					<p style="font-weight: bold">CherryPick</p>
+					<p style="font-weight: bold;">
+						<span style="color: var(--CP-cherry);">Cherry</span>
+						<span style="color: var(--CP-pick);">Pick</span>
+					</p>
 					<div :class="$style.patronsWithIcon">
 						<div v-for="patron in patronsWithIconWithCherryPick" :class="$style.patronWithIcon">
 							<img :src="patron.icon" :class="$style.patronIcon">
@@ -196,7 +199,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 					<div style="margin-top: 16px; display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); grid-gap: 12px;">
 						<div v-for="patron in patronsWithCherryPick" :key="patron">{{ patron }}</div>
 					</div>
-					<p style="font-weight: bold; padding-top: 20px"><b>Misskey</b></p>
+					<p style="font-weight: bold; padding-top: 20px; color: var(--CP-misskey);"><b>Misskey</b></p>
 					<div :class="$style.patronsWithIcon">
 						<div v-for="patron in patronsWithIconWithMisskey" :class="$style.patronWithIcon">
 							<img :src="patron.icon" :class="$style.patronIcon">
@@ -242,6 +245,9 @@ const patronsWithIconWithCherryPick = [{
 }, {
 	name: 'breadguy',
 	icon: 'https://s3.kokonect.link/cherrypick/patreons/04cd46fba69c4953949cd1cc15d8c691.jpg',
+}, {
+	name: 'Evgeni Ku',
+	icon: 'https://s3.kokonect.link/cherrypick/patreons/f8c53a4244844192be76e7cbbb57bb48.jpeg',
 }];
 
 const patronsWithIconWithMisskey = [{
@@ -373,6 +379,9 @@ const patronsWithIconWithMisskey = [{
 }, {
 	name: '秋瀬カヲル',
 	icon: 'https://assets.misskey-hub.net/patrons/0f22aeb866484f4fa51db6721e3f9847.jpg',
+}, {
+	name: '新井　治',
+	icon: 'https://assets.misskey-hub.net/patrons/d160876f20394674a17963a0e609600a.jpg',
 }];
 
 const patronsWithCherryPick = [

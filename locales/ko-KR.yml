@@ -1,5 +1,8 @@
 ---
 _lang_: "한국어"
+keyboardShortcuts: "키보드 단축키"
+truncateAccount: "계정 정리"
+truncateAccountConfirm: "다이렉트 메시지 및 고정된 노트와 관련된 파일을 제외한 모든 노트와 파일이 삭제돼요. 그래도 계속할까요?"
 bubbleTimeline: "버블 타임라인"
 bubbleTimelineDescription: "이 옵션을 활성화하고 모더레이션으로 이동해 버블 타임라인에 표시할 서버를 구성해 주세요."
 bubbleInstancesDescription: "버블 타임라인에 표시할 서버의 호스트 이름을 줄바꿈으로 구분하여 설정해요."
@@ -67,7 +70,7 @@ noteEdited: "노트를 편집했어요!"
 removeModalBgColorForBlur: "모달 배경색 제거"
 skipThisVersion: "이 릴리즈 건너뛰기"
 enableReceivePrerelease: "출시 전 버전 알림 받기"
-youAreRunningBetaClient: "아직 출시되지 않은 버전의 CherryPick를 이용하고 있어요!"
+youAreRunningBetaClient: "아직 출시되지 않은 버전의 CherryPick을 이용하고 있어요!"
 cherrypickUpdate: "CherryPick 업데이트"
 allMediaNoteCollapse: "모든 미디어 노트 간략화하기"
 showingAnimatedImagesDescription: "'건드리면 움직임'으로 설정하면 이미지 위에 마우스를 올리거나 이미지를 터치하면 움직여요."
@@ -112,6 +115,7 @@ introMisskey: "어서오세요! CherryPick은 오픈 소스 분산형 마이크�
 poweredByMisskeyDescription: "{name}은(는) 오픈소스 플랫폼 <b>CherryPick</b>의 서버 중 하나예요."
 monthAndDay: "{month}월 {day}일"
 search: "검색"
+reset: "초기화"
 notifications: "알림"
 username: "사용자 이름"
 password: "비밀번호"
@@ -157,6 +161,7 @@ pin: "프로필에 고정"
 unpin: "프로필에서 고정 해제"
 copyContent: "내용 복사"
 copyLink: "링크 복사"
+copyRemoteLink: "리모트 서버 링크 복사"
 copyLinkRenote: "리노트 링크 복사"
 delete: "삭제"
 deleteAndEdit: "삭제 후 편집"
@@ -819,11 +824,15 @@ smtpSecure: "SMTP 연결에 Implicit SSL/TTS 사용"
 smtpSecureInfo: "STARTTLS 사용 시에는 해제해야 해요."
 testEmail: "이메일 전송 테스트"
 wordMute: "단어 뮤트"
+wordMuteDescription: "정해진 단어가 포함된 노트를 최소화 한 상태로 표시해요. 최소화 된 노트는 클릭해서 표시할 수 있어요."
 hardWordMute: "단어 뮤트(하드)"
+showMutedWord: "뮤트한 단어 표시"
+hardWordMuteDescription: "정한 단어가 들어간 노트를 숨겨요. 단어 뮤트와 다른 점은, 노트가 아예 보이지 않도록 처리돼요."
 regexpError: "정규 표현식 오류"
 regexpErrorDescription: "{tab}단어 뮤트 {line}행의 정규 표현식에 오류가 발생했어요:"
 instanceMute: "서버 뮤트"
 userSaysSomething: "{name}님이 뭔가 말했어요!"
+userSaysSomethingAbout: "{name}님이 \"{word}\"를 언급했어요."
 makeActive: "활성화"
 display: "보기"
 copy: "복사"
@@ -1448,6 +1457,8 @@ lockdown: "잠금"
 pleaseSelectAccount: "계정을 선택해 주세요."
 availableRoles: "사용 가능한 역할"
 acknowledgeNotesAndEnable: "이 기능을 활성화 하기 전에 주의 사항을 확인했어요."
+federationSpecified: "이 서버는 화이트 리스트 제도로 운영되고 있어요. 정해진 리모트 서버가 아닌 경우 연합되지 않아요."
+federationDisabled: "이 서버는 다른 서버와 연합하지 않도록 설정되었어요. 따라서 리모트 서버의 사용자와 통신할 수 없어요."
 showUnreadNotificationsCount: "읽지 않은 알림 수 표시"
 showCatOnly: "고양이만 보기"
 additionalPermissionsForFlash: "Play에 대한 추가 권한"
@@ -1474,7 +1485,7 @@ _showingAnimatedImages:
 _messaging:
   direct: "다이렉트 메시지"
 _accountSettings:
-  requireSigninToViewContents: "콘텐츠 열람 시 로그인하도록 설정"
+  requireSigninToViewContents: "콘텐츠를 열람할 때 로그인을 필수로 설정"
   requireSigninToViewContentsDescription1: "자신이 작성한 모든 게시물과 콘텐츠를 보기 위해서 로그인을 필수로 설정해요. 크롤러가 정보 수집하는 것을 방지하는 효과를 기대할 수 있어요."
   requireSigninToViewContentsDescription2: "URL 미리보기(OGP), 웹페이지 삽입, 노트 인용을 지원하지 않는 서버에서는 게시물을 볼 수 없게 돼요."
   requireSigninToViewContentsDescription3: "원격 서버에 연합된 콘텐츠에는 이러한 제한이 적용되지 않을 수 있어요."
@@ -1563,7 +1574,7 @@ _cherrypick:
   reactableRemoteReaction: "서버에 원격 서버의 이모지와 이름이 같은 이모지가 있으면 원격 서버의 이모지에도 리액션할 수 있음"
   showFollowingMessageInsteadOfButton: "이미 팔로우한 경우 알림 필드에 팔로우 버튼을 표시하지 않음"
   mobileHeaderChange: "모바일 환경에서 헤더 디자인을 변경"
-  renameTheButtonInPostFormToNya: "노트 작성 화면의 '노트' 버튼을 '냥!'으로 변경"
+  renameTheButtonInPostFormToNya: "글 작성란의 '노트' 버튼을 '냥!'으로 변경"
   renameTheButtonInPostFormToNyaDescription: "냐앙냥냥냥냐냥?"
   enableWidgetsArea: "위젯 영역 활성화"
   disableWidgetsArea: "위젯 영역 비활성화"
@@ -2112,7 +2123,7 @@ _signup:
 _accountDelete:
   accountDelete: "계정 삭제"
   mayTakeTime: "계정 삭제는 서버에 부하를 가하기 때문에, 작성한 콘텐츠나 업로드한 파일의 수가 많으면 완료까지 시간이 걸릴 수 있어요."
-  sendEmail: "계정 삭제가 완료되면 등록된 메일 주소로 알림을 보내드려요."
+  sendEmail: "계정 삭제가 완료되면 등록된 메일 주소로 알림을 보내드릴게요."
   requestAccountDelete: "계정 삭제 요청"
   started: "삭제 작업이 시작되었어요."
   inProgress: "삭제 진행 중"
@@ -3103,6 +3114,66 @@ _contextMenu:
   app: "애플리케이션"
   appWithShift: "Shift 키로 애플리케이션"
   native: "브라우저의 UI"
+_gridComponent:
+  _error:
+    requiredValue: "이 값은 필수 항목이에요."
+    columnTypeNotSupport: "정규표현 규칙이 type:text인 칼럼만 지원해요."
+    patternNotMatch: "이 값은 {pattern} 패턴과 일치하지 않아요."
+    notUnique: "이 값은 다른 값과 중복되지 않아야 해요."
+_roleSelectDialog:
+  notSelected: "선택하지 않았어요."
+_customEmojisManager:
+  _gridCommon:
+    copySelectionRows: "선택한 행 복사"
+    copySelectionRanges: "선택한 범위 복사"
+    deleteSelectionRows: "선택한 행 삭제"
+    deleteSelectionRanges: "선택한 행 삭제"
+    searchSettings: "검색 설정"
+    searchSettingCaption: "고급 검색을 설정해요."
+    searchLimit: "표시 제한"
+    sortOrder: "정렬 순서"
+    registrationLogs: "등록 로그"
+    registrationLogsCaption: "이모지를 갱신하거나 삭제할 때 로그가 표시돼요. 갱신 또는 삭제하거나, 페이지 이동 및 새로 고침 시 삭제돼요."
+    alertEmojisRegisterFailedDescription: "이모지를 갱신 또는 삭제하지 못했어요. 자세한 내용은 등록 로그를 확인해 주세요."
+  _logs:
+    showSuccessLogSwitch: "성공 로그 표시"
+    failureLogNothing: "실패 로그가 없어요."
+    logNothing: "로그가 없어요."
+  _remote:
+    selectionRowDetail: "행 선택 (상세)"
+    importSelectionRows: "선택한 행 가져오기"
+    importSelectionRangesRows: "선택한 범위 안의 행 가져오기"
+    importEmojisButton: "선택한 이모지 가져오기"
+    confirmImportEmojisTitle: "이모지 가져오기"
+    confirmImportEmojisDescription: "리모트 서버에서 받아온 이모지 {count}개를 이 서버로 가져오려고 해요. 이모지의 저작권, 라이선스를 확실히 확인하신 후 실행해 주세요."
+  _local:
+    tabTitleList: "등록한 이모지 리스트"
+    tabTitleRegister: "이모지 등록"
+    _list:
+      emojisNothing: "등록한 이모지가 없어요."
+      markAsDeleteTargetRows: "선택한 행을 삭제 대상으로 설정"
+      markAsDeleteTargetRanges: "선택한 범위의 행을 삭제 대상으로 설정"
+      alertUpdateEmojisNothingDescription: "변경할 이모지가 없어요."
+      alertDeleteEmojisNothingDescription: "삭제 대상인 이모지가 없어요."
+      confirmMovePage: "페이지를 이동할까요?"
+      confirmChangeView: "표시를 변경할까요?"
+      confirmUpdateEmojisDescription: "{count}개의 이모지를 갱신하려고 해요. 계속할까요?"
+      confirmDeleteEmojisDescription: "선택한 이모지 {count}개를 삭제하려고 해요. 계속할까요?"
+      confirmResetDescription: "지금까지의 변경 내용이 모두 초기화돼요."
+      confirmMovePageDesciption: "이 페이지의 이모지에 변경된 부분이 있어요.\n저장하지 않은 상태로 페이지를 이동하면 이 페이지에서 바꾼 변경 내용이 모두 취소돼요."
+      dialogSelectRoleTitle: "이모지에 설정된 역할 검색"
+    _register:
+      uploadSettingTitle: "업로드 설정"
+      uploadSettingDescription: "여기서 이모지를 업로드 할 때의 동작을 설정할 수 있어요."
+      directoryToCategoryLabel: "디렉토리 이름을 \"category\"로 입력하기"
+      directoryToCategoryCaption: "디렉토리를 끌어서 놓으면 디렉토리의 이름을 \"category\"로 입력해요."
+      emojiInputAreaCaption: "이모지를 등록할 방법을 선택해 주세요."
+      emojiInputAreaList1: "이 틀 안에 이미지 파일 또는 디렉토리를 끌어서 가져오기"
+      emojiInputAreaList2: "이 링크를 클릭해서 PC에서 선택하기"
+      emojiInputAreaList3: "이 링크를 클릭해서 드라이브에서 선택하기"
+      confirmRegisterEmojisDescription: "리스트에 표시되어진 이모지를 새로운 커스텀 이모지로 등록하려고 해요. 계속할까요? (부하를 피하기 위해, 한 번에 등록할 수 있는 이모지는 {count}건까지 등록할 수 있어요.)"
+      confirmClearEmojisDescription: "편집 내용을 지우고, 목록에 표시되어진 이모지를 지우려고 해요. 계속할까요?"
+      confirmUploadEmojisDescription: "끌어서 놓은 {count}개의 파일을 드라이브에 업로드하려고 해요. 계속할까요?"
 _embedCodeGen:
   title: "임베디드 코드 사용자화"
   header: "해더를 표시"
@@ -3126,6 +3197,37 @@ _selfXssPrevention:
 _followRequest:
   recieved: "받은 신청"
   sent: "보낸 신청"
+_remoteLookupErrors:
+  _federationNotAllowed:
+    title: "이 서버와 통신할 수 없음"
+    description: "이 서버와의 통신이 비활성화 되었거나, 이 서버를 차단 중 또는 상대방 서버에서 차단되었을 수 있어요.\n서버 관리자에게 문의해 주세요."
+  _uriInvalid:
+    title: "URI가 잘못되었어요."
+    description: "입력한 URI에 문제가 있어요. URI에 쓸 수 없는 문자를 넣었는지 확인해 주세요."
+  _requestFailed:
+    title: "요청에 실패했어요."
+    description: "해당 서버와 통신을 실패했어요. 상대방 서버에 접속 불가능한 상태이거나, 잘못된 URI 또는 존재하지 않는 URI를 입력했는지 다시 확인해 주세요."
+  _responseInvalid:
+    title: "유효하지 않은 응답을 수신했어요."
+    description: "이 서버와 통신할 수 있지만 데이터가 올바르지 않아요."
+  _responseInvalidIdHostNotMatch:
+    description: "입력된 URI과 실제 URI가 달라요. 제 3자 서버를 통한 리모트 컨텐츠를 조회하는 경우, 원래 서버 측에서 받아올 수 있는 URI를 사용하여 조회하는 것이 좋아요."
+  _noSuchObject:
+    title: "찾을 수 없습니다"
+    description: "요구된 리소스를 찾을 수 없습니다. URI를 다시 한 번 확인해보세요."
+_captcha:
+  verify: "먼저 CAPTCHA 인증을 진행해 주세요."
+  testSiteKeyMessage: "사이트 키와 비밀 키에 테스트용 값을 입력하여 미리보기를 확인할 수 있어요.\n자세한 내용은 아래 페이지를 확인해 주세요."
+  _error:
+    _requestFailed:
+      title: "CAPTCHA 요청에 실패했어요."
+      text: "잠시 후에 다시 시도하거나, 설정을 다시 한 번 확인해 주세요."
+    _verificationFailed:
+      title: "CAPTCHA 검증에 실패했어요."
+      text: "설정이 올바른지 다시 한 번 확인해 주세요."
+    _unknown:
+      title: "CAPTCHA 오류"
+      text: "알 수 없는 오류가 발생했어요."
 _abuse:
   _resolver:
     1hour: "1시간"
@@ -3184,3 +3286,26 @@ _searchSite:
   otherDescription: "검색 엔진을 직접 지정할 수 있어요."
   query: "검색 쿼리"
   queryDescription: "검색 엔진이 사용할 쿼리를 입력해 주세요. (예: https://www.google.com/search?q=test 의 경우 q를 입력)"
+_accountTruncate:
+  accountTruncate: "계정 정리"
+  mayTakeTime: "계정 정리는 서버에 부하를 가하기 때문에, 작성한 콘텐츠나 업로드한 파일의 수가 많으면 완료까지 시간이 걸릴 수 있어요."
+  sendEmail: "계정 정리가 완료되면 등록된 메일 주소로 알림을 보내드릴게요."
+  requestAccountTruncate: "계정 정리 요청"
+  started: "정리 작업이 시작되었어요."
+  inProgress: "정리 진행 중"
+_keyboardShortCut:
+  title: "키보드 단축키"
+  description: "클라이언트에서 사용할 수 있는 키보드 단축키 목록이에요."
+  list: "단축키 목록"
+  _category:
+    general: "일반"
+    postForm: "글 입력란"
+  _general:
+    openPostForm: "글 입력란 열기"
+    toggleDarkMode: "다크 모드 전환"
+    redirectToSearch: "검색 페이지로 이동"
+  _postForm:
+    toggleVisibility: "공개 범위 전환"
+    toggleLocalOnly: "연합 비활성화 토글"
+    featureWarn: "이 기능은 [설정 - CherryPick]에서 변경할 수 있어요."
+    sendPost: "게시하기"

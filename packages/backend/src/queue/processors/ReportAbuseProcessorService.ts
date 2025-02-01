@@ -73,6 +73,7 @@ export class ReportAbuseProcessorService {
 		const reporterAcct = reporter.host ? `${reporter.username.toLowerCase()}@${reporter.host}` : reporter.username.toLowerCase();
 
 		for (const resolver of resolvers) {
+			// eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
 			if (!(resolver.targetUserPattern || resolver.reporterPattern || resolver.reportContentPattern)) {
 				continue;
 			}

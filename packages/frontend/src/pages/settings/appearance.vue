@@ -212,7 +212,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 				</MkFolder>
 			</div>
 
-			<MkSelect v-model="instanceTicker">
+			<MkSelect v-if="instance.federation !== 'none'" v-model="instanceTicker">
 				<template #label>{{ i18n.ts.instanceTicker }}</template>
 				<option value="always">{{ i18n.ts._instanceTicker.always }}</option>
 				<option value="remote">{{ i18n.ts._instanceTicker.remote }}</option>
@@ -281,6 +281,7 @@ import MkFolder from '@/components/MkFolder.vue';
 import FormSection from '@/components/form/section.vue';
 import FromSlot from '@/components/form/slot.vue';
 import MkInfo from '@/components/MkInfo.vue';
+import { instance } from '@/instance.js';
 import { defaultStore } from '@/store.js';
 import { reloadAsk } from '@/scripts/reload-ask.js';
 import { i18n } from '@/i18n.js';

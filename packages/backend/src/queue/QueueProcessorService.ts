@@ -33,6 +33,7 @@ import { ImportUserListsProcessorService } from './processors/ImportUserListsPro
 import { ImportCustomEmojisProcessorService } from './processors/ImportCustomEmojisProcessorService.js';
 import { ImportAntennasProcessorService } from './processors/ImportAntennasProcessorService.js';
 import { DeleteAccountProcessorService } from './processors/DeleteAccountProcessorService.js';
+import { TruncateAccountProcessorService } from './processors/TruncateAccountProcessorService.js';
 import { ExportFavoritesProcessorService } from './processors/ExportFavoritesProcessorService.js';
 import { CleanRemoteFilesProcessorService } from './processors/CleanRemoteFilesProcessorService.js';
 import { DeleteFileProcessorService } from './processors/DeleteFileProcessorService.js';
@@ -121,6 +122,7 @@ export class QueueProcessorService implements OnApplicationShutdown {
 		private importCustomEmojisProcessorService: ImportCustomEmojisProcessorService,
 		private importAntennasProcessorService: ImportAntennasProcessorService,
 		private deleteAccountProcessorService: DeleteAccountProcessorService,
+		private truncateAccountProcessorService: TruncateAccountProcessorService,
 		private deleteFileProcessorService: DeleteFileProcessorService,
 		private cleanRemoteFilesProcessorService: CleanRemoteFilesProcessorService,
 		private relationshipProcessorService: RelationshipProcessorService,
@@ -233,6 +235,7 @@ export class QueueProcessorService implements OnApplicationShutdown {
 					case 'importCustomEmojis': return this.importCustomEmojisProcessorService.process(job);
 					case 'importAntennas': return this.importAntennasProcessorService.process(job);
 					case 'deleteAccount': return this.deleteAccountProcessorService.process(job);
+					case 'truncateAccount': return this.truncateAccountProcessorService.process(job);
 					case 'reportAbuse': return this.reportAbuseProcessorService.process(job);
 					default: throw new Error(`unrecognized job type ${job.name} for db`);
 				}

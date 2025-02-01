@@ -1663,3 +1663,6 @@ _moderationLogTypes:
   resetPassword: "Zresetuj hasło"
 _reversi:
   total: "Łącznie"
+_remoteLookupErrors:
+  _noSuchObject:
+    title: "Nie znaleziono"

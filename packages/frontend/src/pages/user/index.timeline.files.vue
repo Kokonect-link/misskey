@@ -14,7 +14,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 
 	<template #default="{ items: user }">
 		<div :class="$style.stream">
-			<XFiles v-for="item in user" :key="item.user.id" :user="item.user" :files="item"/>
+			<XFiles v-for="item in user" :key="item.user.id" :user="item.user" :note="item"/>
 		</div>
 	</template>
 </MkPagination>

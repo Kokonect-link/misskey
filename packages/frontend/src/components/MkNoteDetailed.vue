@@ -84,7 +84,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 						</span>
 						<span v-if="appearNote.localOnly" style="margin-left: 0.5em;"><i v-tooltip="i18n.ts._visibility['disableFederation']" class="ti ti-rocket-off"></i></span>
 					</div>
-					<MkInstanceTicker v-if="showTicker" :instance="appearNote.user.instance" @click="showOnRemote"/>
+					<MkInstanceTicker v-if="showTicker" :host="appearNote.user.host" :instance="appearNote.user.instance" @click="showOnRemote"/>
 				</div>
 				<!--
 				<div :class="$style.noteHeaderUsernameAndBadgeRoles">
@@ -142,7 +142,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 							:enableEmojiMenu="!!$i"
 							:enableEmojiMenuReaction="!!$i"
 						/>
-						<MkPoll v-if="appearNote.poll" ref="pollViewer" :noteId="appearNote.id" :poll="appearNote.poll" :class="$style.poll" isTranslation/>
+						<MkPoll v-if="appearNote.poll" ref="pollViewer" :noteId="appearNote.id" :poll="appearNote.poll" :class="$style.poll" :author="appearNote.user" :emojiUrls="appearNote.emojis" isTranslation/>
 						<div v-if="translation.translator == 'ctav3'" style="margin-top: 10px; padding: 0 0 15px;">
 							<img v-if="!defaultStore.state.darkMode" src="/client-assets/color-short.svg" alt="" style="float: right;">
 							<img v-else src="/client-assets/white-short.svg" alt="" style="float: right;"/>
@@ -158,7 +158,7 @@ SPDX-License-Identifier: AGPL-3.0-only
 					<MkMediaList v-if="appearNote.disableRightClick" ref="galleryEl" :mediaList="appearNote.files" @contextmenu.prevent/>
 					<MkMediaList v-else ref="galleryEl" :mediaList="appearNote.files"/>
 				</div>
-				<MkPoll v-if="appearNote.poll" ref="pollViewer" :noteId="appearNote.id" :poll="appearNote.poll" :class="$style.poll"/>
+				<MkPoll v-if="appearNote.poll" ref="pollViewer" :noteId="appearNote.id" :poll="appearNote.poll" :class="$style.poll" :author="appearNote.user" :emojiUrls="appearNote.emojis"/>
 				<div v-if="isEnabledUrlPreview">
 					<MkUrlPreview v-for="url in urls" :key="url" :url="url" :compact="true" :detail="true" style="margin-top: 6px;"/>
 				</div>
@@ -994,6 +994,7 @@ function showOnRemote() {
 .noteHeaderBadgeRole {
 	height: 1.3em;
 	vertical-align: -20%;
+	border-radius: 0.4em;
 
 	& + .noteHeaderBadgeRole {
 		margin-left: 0.2em;
@@ -1231,6 +1232,7 @@ function showOnRemote() {
 .badgeRole {
 	height: 1.3em;
 	vertical-align: -20%;
+	border-radius: 0.4em;
 
 	& + .badgeRole {
 		margin-left: 0.2em;

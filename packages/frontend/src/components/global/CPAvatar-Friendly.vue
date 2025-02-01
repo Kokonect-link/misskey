@@ -39,8 +39,8 @@ SPDX-License-Identifier: AGPL-3.0-only
 import { onMounted, onUnmounted, watch, ref, computed } from 'vue';
 import * as Misskey from 'cherrypick-js';
 import { extractAvgColorFromBlurhash } from '@@/js/extract-avg-color-from-blurhash.js';
-import MkImgWithBlurhash from '@/components/MkImgWithBlurhash.vue';
-import MkA from '@/components/global/MkA.vue';
+import MkImgWithBlurhash from '../MkImgWithBlurhash.vue';
+import MkA from './MkA.vue';
 import { getStaticImageUrl } from '@/scripts/media-proxy.js';
 import { acct, userPage } from '@/filters/user.js';
 import { defaultStore } from '@/store.js';
