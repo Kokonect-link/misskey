@@ -1,9 +1,7 @@
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-
+    image: mcr.microsoft.com/devcontainers/javascript-node:20
+    
     volumes:
       - ../:/workspace:cached
       - node_modules:/workspace/node_modules

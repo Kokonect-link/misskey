@@ -11,5 +11,6 @@
 	"editor.codeActionsOnSave": {
 		"source.fixAll": "explicit"
 	},
-	"editor.formatOnSave": false
+	"editor.formatOnSave": false,
+	"npm.packageManager": "pnpm"
 }
